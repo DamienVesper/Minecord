@@ -1,0 +1,52 @@
+{
+  "name": "tornbot",
+  "version": "1.0.0",
+  "description": "A Discord bot for the game Torn.Space.",
+  "main": "runtime.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "express --view=pug _site",
+    "start": "node runtime.js"
+  },
+  "engines": {
+    "node": "11.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DamienVesper/Minecord.git"
+  },
+  "keywords": [
+    "torn.space",
+    "games",
+    "discord-bot"
+  ],
+  "author": "DamienVesper",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DamienVesper/Minecord/issues"
+  },
+  "homepage": "https://github.com/DamienVesper/Minecord#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cookie-parser": "^1.4.4",
+    "core-js": "^3.6.4",
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.2.0",
+    "events": "^3.1.0",
+    "express": "^4.17.1",
+    "ffmpeg": "0.0.4",
+    "fs": "^0.0.2",
+    "http-errors": "^1.7.3",
+    "json": "^9.0.6",
+    "math.js": "^1.1.46",
+    "mongodb": "^3.5.5",
+    "mongoose": "^5.9.7",
+    "morgan": "^1.9.1",
+    "node-opus": "^0.3.2",
+    "pug": "^2.0.4",
+    "request": "^2.88.2",
+    "sqlite3": "^4.1.1",
+    "util": "^0.12.1",
+    "ytdl-core": "^2.0.0"
+  }
+}

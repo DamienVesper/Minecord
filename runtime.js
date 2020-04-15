@@ -1,0 +1,1 @@
+const DiscordBot = require(`./src/index.js`);
