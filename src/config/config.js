@@ -7,9 +7,9 @@ var config = {
         warning: 0xffa500,
         danger: 0xff0000
     },
-	developer: `DamienVesper`,
+    developer: `DamienVesper`,
 	developerTag: `2257`,
-    developerID: `386940319666667521`,
+    developerIDs: [`386940319666667521`, `125016735660113920`],
     hostname: `gateway.discord.gg`,
 	prefix: `m!`,
     token: process.env.DISCORD_BOT_TOKEN,

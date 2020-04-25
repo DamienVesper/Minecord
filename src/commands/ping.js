@@ -7,11 +7,11 @@ module.exports = {
     description: `View API response times.`,
     usage: null,
     cooldown: null,
-    aliases: []
+    aliases: null
 }
 
 module.exports.run = async(client, message, args) => {
-    const m = `${message.author} » `;
+    const m = `${message.author} »`;
 
     let msg = await message.channel.send(`Ping?`);
 

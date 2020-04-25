@@ -225,7 +225,29 @@ const userSchema = new mongoose.Schema({
         jungle: {
             type: Number,
             required: true
+        }
+    },
+    drops: {
+        rottenFlesh: {
+            type: Number,
+            required: true
         },
+        bone: {
+            type: Number,
+            required: true
+        },
+        string: {
+            type: Number,
+            required: true
+        },
+        gunpowder: {
+            type: Number,
+            required: true
+        },
+        enderPearl: {
+            type: Number,
+            required: true
+        }
     },
     xp: {
         type: Number,

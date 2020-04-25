@@ -5,16 +5,16 @@ const { emojis } = require(`../config/emojis`);
 
 module.exports = {
     name: `profile`,
-    description: ``,
+    description: `View a user's profile.`,
     usage: null,
     cooldown: null,
-    aliases: []
+    aliases: [`p`, `user`, `info`]
 }
 
-let calculateMaxExp = level => { return (level + 1) * 100; }
+let calculateMaxExp = level => { return Math.floor((100 * Math.E * level) / 2); }
 
 module.exports.run = async(client, message, args) => {
-    const m = `${message.author} » `;
+    const m = `${message.author} »`;
 
     let discUser;
     if(args[0]) {
@@ -56,13 +56,13 @@ module.exports.run = async(client, message, args) => {
 
     let sEmbed = new Discord.RichEmbed()
         .setAuthor(`User Profile | ${discUser.tag}`, discUser.avatarURL)
-        .setColor(0x1e90ff)
+        .setColor(0xcfcf53)
         .addField(`Weapons & Value`, `
             Tools: ${toolsText}
             Money: $${dbUser.money}
 
             Level: ${dbUser.level}
-            XP: ${dbUser.xp} / ${calculateMaxExp(dbUser.level)}
+            XP: ${Math.round(dbUser.xp)} / ${calculateMaxExp(dbUser.level)}
         `, true)
         .addField(`Stats`, `
             Times Mined: ${dbUser.stats.totalMines}

@@ -7,13 +7,15 @@ module.exports = {
     description: `Developer commands.`,
     usage: null,
     cooldown: null,
-    aliases: []
+    aliases: null,
+    dev: true
 }
 
 module.exports.run = async(client, message, args) => {
-    const m = `${message.author} » `;
+    const m = `${message.author} »`;
+    let dbUser = await User.findOne({ discordID: message.author.id });
 
-    if(message.author.id != config.developerID && message.author.id != `125016735660113920`) return message.channel.send(`${m} You can't use that!`);
+    if(!config.developerIDs.includes(message.author.id)) return message.channel.send(`${m} You can't use that!`);
     
     switch(args.shift()) {
         case `udelete`:
@@ -37,10 +39,15 @@ module.exports.run = async(client, message, args) => {
         case `reload`:
             if(!args[0]) return message.channel.send(`${m} Proper usage is \`${config.prefix}dev reload <command>\`.`);
 
-            const cmd = require(`../commands/${args[0]}`);
-            client.commands.delete(args[0]);
-            client.commands.set(args[0], cmd);
-            message.channel.send(`${m} Command \`${args[0]}.js\` was reloaded!`)
+            let command = client.commands.get(args[0])|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(args[0]));
+
+            delete require.cache[require.resolve(`./${command.name}.js`)];
+
+            let reloadedCommand = require(`./${command.name}.js`);
+
+            client.commands.set(reloadedCommand.name, reloadedCommand);
+            message.channel.send(`${m} Command \`${command.name}.js\` was reloaded!`)
+
             break;
         default: return message.channel.send(`${m} That dev command doesn't exist!`);
     }

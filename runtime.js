@@ -1,1 +1,1 @@
-const DiscordBot = require(`./src/index.js`);
+const DiscordBot = require(`./src/shardManager.js`);

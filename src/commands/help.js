@@ -1,35 +1,75 @@
-const Discord = require(`discord.js`);
+/*const Discord = require(`discord.js`);
 const User = require(`../models/user.model`);
 const { config } = require(`../index.js`);
+const { emojis } = require(`../config/emojis`);
 
 module.exports = {
     name: `help`,
     description: `View the help menu.`,
     usage: null,
     cooldown: null,
-    aliases: []
+    aliases: [`?`]
 }
 
 module.exports.run = async(client, message, args) => {
-    let sEmbed = new Discord.RichEmbed()
-      .setAuthor(`Help Menu`)
-      .addField(`\u200B`, `
-\`${config.prefix}start\` - Register.
-\`${config.prefix}mine\` - Mine items.
-\`${config.prefix}chop\` - Chop items.
-\`${config.prefix}sell [item]\` - Sell items.
-\`${config.prefix}shop [type]\` - View shops!
-\`${config.prefix}buy [tool] [grade]\` - Buy items.
-`, true)
-      .addField(`\u200B`, `
-\`${config.prefix}balance <user>\` - View a user's balance.
-\`${config.prefix}cooldown\` - See your cooldowns.
-\`${config.prefix}inventory <user>\` - Get a user's inventory.
-\`${config.prefix}invite\` - Invite the bot!
-\`${config.prefix}support\` - Join our support server!
-`, true)
-      .setTimestamp(new Date())
-      .setFooter(config.footer);
+    const m = `${message.author} »`;
 
-    message.channel.send(sEmbed);
-} 
+
+    let sEmbed = new Discord.RichEmbed()
+        .setColor(0xcccccc)
+        .setAuthor(`Help Menu`, null, `https://minecorddocs.glitch.me/`)
+        .setTimestamp(new Date())
+        .setFooter(config.footer);
+
+    client.commands.forEach(cmd => cmd.name != `` ? helpTxt += `\`${config.prefix + cmd.name} ${(cmd.usage !== null ? cmd.usage: ``)}\` - ${cmd.description}\n`: null);
+
+    return message.channel.send(sEmbed);
+}
+*/
+const Discord = require(`discord.js`);
+const User = require(`../models/user.model`);
+const { config } = require(`../index.js`);
+
+module.exports = {
+	name: `help`,
+	description: `View info about commands.`,
+	usage: `[command name]`,
+	cooldown: null,
+    aliases: [`commands`, `?`, `h`]
+}
+
+module.exports.run = async(client, message, args) => {
+    const v = `${message.author} »`
+    const commands = client.commands;
+    let data = [];
+
+    if(!args[0]) {
+        let helpTxt = ``;
+        commands.forEach(cmd => cmd.dev != true && cmd.name != `` ? helpTxt += `\`${config.prefix + cmd.name + (cmd.usage !== null ? ` ${cmd.usage}`: ``)}\` - ${cmd.description}\n`: null);
+
+        let sEmbed = new Discord.RichEmbed()
+            .setColor(0xcfcf53)
+            .setAuthor(`Help Menu`, null, `https://minecorddocs.glitch.me/`)
+            .setDescription(helpTxt)
+            .setTimestamp(new Date())
+            .setFooter(config.footer);
+        return message.channel.send(sEmbed);
+    }
+
+    const name = args[0].toLowerCase();
+    const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
+
+    if(!command || command.name == `dev`) return message.channel.send(`${v} That is not a valid command!`);
+
+    if(command.usage) data.push(`**Usage:** ${config.prefix}${command.name} ${command.usage}`);
+    if(command.aliases) data.push(`**Aliases:** ${command.aliases.join(`, `)}`);
+    if(command.cooldown !== null) data.push(`**Cooldown:** ${command.cooldown} seconds.`);
+
+    let sEmbed = new Discord.RichEmbed()
+        .setColor(0xcfcf53)
+        .setAuthor(`Help Menu | ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}`)
+        .setDescription(`${command.description}\n\n${data.join(`\n`)}`)
+        .setTimestamp(new Date())
+        .setFooter(config.footer);
+    return message.channel.send(sEmbed);
+}

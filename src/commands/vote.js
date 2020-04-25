@@ -4,8 +4,8 @@ const { config } = require(`../index.js`);
 const { emojis } = require(`../config/emojis`);
 
 module.exports = {
-    name: ``,
-    description: ``,
+    name: `vote`,
+    description: `Vote for money.`,
     usage: null,
     cooldown: null,
     aliases: null
