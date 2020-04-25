@@ -33,7 +33,7 @@ client.on(`ready`, async () => {
 
 /* Client Commands */
 client.events = new Discord.Collection();
-fs.readdir(`./src/events/`, (err, files) => {
+fs.readdir(`${__dirname}/events/`, (err, files) => {
     if(err) console.error(err);
 
     let jsFiles = files.filter(f => f.split(`.`).pop() == `js`);
@@ -47,7 +47,7 @@ fs.readdir(`./src/events/`, (err, files) => {
 
 /* Client Commands */
 client.commands = new Discord.Collection();
-fs.readdir(`./src/commands/`, (err, files) => {
+fs.readdir(`${__dirname}/commands/`, (err, files) => {
     if(err) console.error(err);
 
     let jsFiles = files.filter(f => f.split(`.`).pop() == `js`);
