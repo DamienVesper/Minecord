@@ -38,11 +38,13 @@ module.exports.run = async(client, message, args) => {
     let users = await User.find({});
     for(let i in users) {
         let user = users[i];
-        lb.push({
-            bal: user.money,
-            discordID: user.discordID,
-            level: user.level
-        });
+        if(client.users.get(user.discordID)) {
+            lb.push({
+                bal: user.money,
+                discordID: user.discordID,
+                level: user.level
+            });
+        }
     }
     
     switch(args[0]) {

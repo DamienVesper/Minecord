@@ -79,6 +79,7 @@ client.on(`message`, async message => {
     /* Botception & Message Handling */
     if(message.author.bot || message.channel.type == `dm`) return;
     if(message.content.slice(0, config.prefix.length).toString().toLowerCase() != config.prefix) return;
+//  if(!message.content.toLowerCase().startsWith(config.prefix)) return;
 
     /* Get Commands & Arguments */
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
@@ -120,5 +121,28 @@ client.on(`message`, async message => {
     }
 });
 
+//DBL API
+const dbl = async() => {
+    const DBL = require(`dblapi.js`);
+    const dbl = new DBL(process.env.DBL_TOKEN, {
+            webhookPort: 5000,
+            webhookAuth: process.env.WEBHOOK_AUTH
+        }, client);
+
+    dbl.webhook.on(`ready`, hook => console.log(`Webhook running at https://${hook.hostname}:${hook.port + hook.path}.`));
+    dbl.webhook.on(`vote`, async vote => {
+        let dbUser = await User.findOne({ discordID: vote.user });
+        dbUser.ores.emerald += 10;
+        let voteRewardMsg = `${client.users.get(vote.user).tag} just voted and received 10 emeralds ${emojis.emerald}`
+
+        dbUser.save(err => client.channels.get(`653285446738116608`).send(err ? `There was an error processing a vote.`: voteRewardMsg));
+    });
+
+    let guildCount = await client.shard.fetchClientValues(`guilds.size`);
+    setInterval(() => dbl.postStats(guildCount, client.shards.Id, client.shards.total), 18e5);
+}
+
 client.login(config.token).catch(err => console.error(`Failed to authenticate client with application.`));
 client.setMaxListeners(0);
+
+if(client.shard.id == 0) dbl();

@@ -49,7 +49,7 @@ module.exports.run = async(client, message, args) => {
     let sEmbed = new Discord.RichEmbed()
         .setColor(0xffa500)
         .setAuthor(`Shop Menu | ${type}`)
-        .setDescription(`Use \`${config.prefix}buy ${client.commands.get(`buy`).usage}\` to buy an item.\n\n${shopTxt}`)
+        .setDescription(`${shopTxt == `` ? `This shop is out of stock!`: `Use \`${config.prefix}buy ${client.commands.get(`buy`).usage}\` to buy an item.\n\n${shopTxt}`}`)
         .setTimestamp(new Date())
         .setFooter(config.footer);
     return message.channel.send(sEmbed);
