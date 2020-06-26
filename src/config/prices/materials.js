@@ -5,12 +5,16 @@ const prices = {
     gold: 6,
     redstone: 6,
     diamond: 11,
+    netherite: 13,
+    prism: 15,
+    prisms: 15,
 
     oak: 5,
     birch: 6,
     spruce: 14,
     jungle: 6,
     acacia: 30,
+    charcoal: 15,
     
     wheat: 6,
     wheatSeeds: 7,
@@ -20,9 +24,10 @@ const prices = {
 
     rottenFlesh: 6,
     string: 7,
-    bones: 9,
+    bone: 9,
     gunpowder: 11,
-    pearls: 15,
+    enderPearl: 15,
+    shulkerShells: 20,
 
     pork: 100,
     rainbows: 70,
@@ -32,7 +37,8 @@ const prices = {
     snow: 120,
 
     obsidian: 1000,
-    pearls: 50
+
+    emerald: null,
 }
 
 module.exports = { prices }

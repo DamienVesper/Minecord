@@ -10,7 +10,8 @@ module.exports = {
     description: `View the shop.`,
     usage: `[type]`,
     cooldown: null,
-    aliases: null
+    aliases: null,
+    dev: true
 }
 
 const format = value => {

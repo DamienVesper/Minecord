@@ -77,6 +77,14 @@ const userSchema = new mongoose.Schema({
         emerald: {
             type: Number,
             required: true
+        },
+        netherite: {
+            type: Number,
+            required: true
+        },
+        prisms: {
+            type: Number,
+            required: false
         }
     },
     plants: {
@@ -158,6 +166,10 @@ const userSchema = new mongoose.Schema({
             diamond: {
                 type: Boolean,
                 required: true
+            },
+            netherite: {
+                type: Boolean,
+                required: true
             }
         },
         pickaxes: {
@@ -180,6 +192,18 @@ const userSchema = new mongoose.Schema({
             diamond: {
                 type: Boolean,
                 required: true
+            },
+            netherite: {
+                type: Boolean,
+                required: true
+            },
+            rainbow: {
+                type: Boolean,
+                required: false
+            },
+            mystery: {
+                type: Boolean,
+                required: false
             }
         },
         axes: {
@@ -202,6 +226,18 @@ const userSchema = new mongoose.Schema({
             diamond: {
                 type: Boolean,
                 required: true
+            },
+            netherite: {
+                type: Boolean,
+                required: true
+            },
+            fire: {
+                type: Boolean,
+                required: false
+            },
+            battle: {
+                type: Boolean,
+                required: false
             }
         }
     },
@@ -225,6 +261,10 @@ const userSchema = new mongoose.Schema({
         jungle: {
             type: Number,
             required: true
+        },
+        charcoal: {
+            type: Number,
+            required: false
         }
     },
     drops: {
@@ -247,6 +287,14 @@ const userSchema = new mongoose.Schema({
         enderPearl: {
             type: Number,
             required: true
+        },
+        shulkerShells: {
+            type: Number,
+            required: true
+        },
+        netherStars: {
+            type: Number,
+            required: false
         }
     },
     xp: {

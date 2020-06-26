@@ -46,9 +46,53 @@ module.exports.run = async(client, message, args) => {
             let reloadedCommand = require(`./${command.name}.js`);
 
             client.commands.set(reloadedCommand.name, reloadedCommand);
-            message.channel.send(`${m} Command \`${command.name}.js\` was reloaded!`)
+            message.channel.send(`${m} Command \`${command.name}.js\` was reloaded.`);
 
             break;
+        case `give`:
+
+    let giver = message.author
+
+    let receiver;
+    if(args[0]) {
+        receiver = message.mentions.members.first();
+        if(!receiver) {
+            receiver = args[0];
+            if(isNaN(parseInt(receiverr))) return message.channel.send(`${m} That is an invalid user ID!`);
+            discUser = client.users.get(receiver);
+        }
+        else receiver = receiver.user;
+    }
+        if(!receiver) return message.channel.send(`${m} That user doesn't have an account!`);
+        const m2 = `${receiver} »`;
+
+    let dbReceiver = await User.findOne({ discordID: receiver.id });
+    let dbGiver = await User.findOne({ discordID: giver.id });
+
+    for(let i = 0; i<args.length; i++) { args[i] = args[i].toLowerCase(); }
+
+    let item = args[1];
+    
+    switch(item) {
+        case `money`:
+            dbReceiver.money += Number(args[2]);
+        break;
+        default:
+        if(Object.keys(dbGiver.ores).includes(item)) {
+            dbReceiver.ores[item] += Number(args[2]);
+        }
+        else if(Object.keys(dbUser.wood).includes(item)) {
+            dbReceiver.wood[item] += Number(args[2]);
+        }
+        else if(Object.keys(dbUser.drops).includes(item)) {
+            dbReceiver.drops[item] += Number(args[2]);
+
+        } else return('Could not locate item: ' + item);
+
+        dbGiver.save(err => message.channel.send(`${m} ${err ? `There was an error executing that command.`: `You gave ${args[2]} ${item} to ${receiver}`}`));
+        dbReceiver.save(err => message.channel.send(`${err ? `${m2} There was an error executing that command.`: ``}`));
+    }
+        break;
         default: return message.channel.send(`${m} That dev command doesn't exist!`);
     }
 }

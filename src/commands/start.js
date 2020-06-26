@@ -38,7 +38,8 @@ module.exports.run = async(client, message, args) => {
             diamond: 0,
             lapis: 0,
             redstone: 0,
-            emerald: 0
+            emerald: 0,
+            netherite: 0
         },
         plants: {
             beetroot: 0,
@@ -65,21 +66,24 @@ module.exports.run = async(client, message, args) => {
                 stone: false,
                 iron: false,
                 gold: false,
-                diamond: false
+                diamond: false,
+                netherite: false
             },
             pickaxes: {
                 wood: true,
                 stone: false,
                 iron: false,
                 gold: false,
-                diamond: false
+                diamond: false,
+                netherite: false
             },
             axes: {
                 wood: true,
                 stone: false,
                 iron: false,
                 gold: false,
-                diamond: false
+                diamond: false,
+                netherite: false
             }
         },
         wood: {
@@ -94,10 +98,12 @@ module.exports.run = async(client, message, args) => {
             bone: 0,
             string: 0,
             gunpowder: 0,
-            enderPearl: 0
+            enderPearl: 0,
+            shulkerShells: 0
         },
         xp: 0,
         level: 0
     });
-    user.save(err => err ? message.channel.send(`${m} There was an error executing that command.`): message.channel.send(`${m} You have received your ${emojis.woodSword} ${emojis.woodPick} ${emojis.woodAxe}.`));
+    user.save(err => err ? message.channel.send(`${m} There was an error executing that command.`): message.channel.send(`${m} You have received your ${emojis.woodSword} ${emojis.woodPick} ${emojis.woodAxe}.
+Type \`m!mine\` \`m!fight\` \`m!chop\` to use them!`));
 }

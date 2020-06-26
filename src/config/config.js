@@ -9,7 +9,7 @@ var config = {
     },
     developer: `DamienVesper`,
 	developerTag: `2257`,
-    developerIDs: [`386940319666667521`, `125016735660113920`],
+    developerIDs: [`386940319666667521`, `125016735660113920`, `119912680583593987`],
     hostname: `gateway.discord.gg`,
 	prefix: `m!`,
     token: process.env.DISCORD_BOT_TOKEN,
@@ -21,8 +21,8 @@ var config = {
         },
         password: process.env.DATABASE_PASSWORD
     },
-    version: `0.0.1b`,
-    footer: `© Minecord 2020`
+    version: `4.4.7`,
+    footer: `© Minecord 2020 | m!support`
 }
 
 config.footer += ` | v${config.version}`;
