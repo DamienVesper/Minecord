@@ -40,7 +40,7 @@ Owner: ${guild.owner.displayName} (${guild.owner})
 Members: ${guild.memberCount}`)
 embed.setThumbnail(guild.iconURL)
   embed.setTimestamp()
-  client.channels.get(`679776082186207401`).send(embed)
+  client.shard.broadcastEval('client.shard.channels.get(`679776082186207401`) ? client.shard.channels.get(`679776082186207401`).send(embed) : console.log(`Could not locate channel.`);');
 });
 client.on('guildDelete', guild => {
   let embed = new Discord.RichEmbed()
@@ -52,7 +52,7 @@ Owner: ${guild.owner.displayName} (${guild.owner})
 Members: ${guild.memberCount}`)
   embed.setThumbnail(guild.iconURL)
   embed.setTimestamp()
-  client.channels.get(`679776082186207401`).send(embed)
+  client.shard.broadcastEval('client.shard.channels.get(`679776082186207401`) ? client.shard.channels.get(`679776082186207401`).send(embed) : console.log(`Could not locate channel.`);');
 });
 
 if(client.shard.id == 0) {
@@ -143,7 +143,7 @@ client.on(`message`, async message => {
         if(!dbUser && command != `start` && command != `help`) return message.channel.send(`${m} You don't have an account yet!\n Do \`${config.prefix}start\` to begin your adventure!`);
 
         if(dbUser && command != `start`) {
-            if(dbUser.banned) return message.channel.send(`${m} You're banned, fool! <:GetBannedLol:653692630093266949>`);
+            if(dbUser.banned) console.log(`[BANNED USER] ${message.author.tag} ran command ${command} in ${message.guild.name} [${message.guild.id}].`); if(dbUser.banned) return message.channel.send(`${m} You're banned, fool! <:GetBannedLol:653692630093266949>`);
             if(message.guild.id == `625357023315230760`) {
                 const addRole = roleID => { message.member.addRole(message.guild.roles.get(roleID)); }
                 const roles = [`625451047736836116`, `625451072152141825`, `625451095791108106`, `625451121976147969`, `625451142033309723`, `717532445213196380`, `724415595071799336`, `724415492281860116`];

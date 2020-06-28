@@ -1,5 +1,6 @@
 const prices = {
     swords: {
+        wood: [``],
         stone: [1e3, `cash`],
         iron: [75e2, `cash`],
         gold: [75e3, `cash`],
@@ -13,6 +14,7 @@ const prices = {
         // corona: [1e3, `germs`]        
     },
     pickaxes: {
+        wood: [``],
         stone: [1e3, `cash`],
         iron: [75e2, `cash`],
         gold: [75e3, `cash`],
@@ -28,6 +30,7 @@ const prices = {
 
     },
     axes: {
+        wood: [``],
         stone: [1e3, `cash`],
         iron: [75e2, `cash`],
         gold: [75e3, `cash`],

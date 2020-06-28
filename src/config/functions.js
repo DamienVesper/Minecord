@@ -59,5 +59,6 @@ module.exports = {
         return result;
     },
     toCapitalString: string => { return string.toString().replace(/^\w/, f => f.toUpperCase()).split(/(?=[A-Z])/).join(` `) },
-    toCapitalStringFromArray: array => { return array.join(``).toString().replace(/^\w/, f => f.toUpperCase()).split(/(?=[A-Z])/).join(` `) }
+    toCapitalStringFromArray: array => { return array.join(``).toString().replace(/^\w/, f => f.toUpperCase()).split(/(?=[A-Z])/).join(` `) },
+    addCommaSeparators: num  => { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }
 }

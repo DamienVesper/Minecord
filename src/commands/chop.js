@@ -1,4 +1,4 @@
-    const Discord = require(`discord.js`);
+const Discord = require(`discord.js`);
 const User = require(`../models/user.model`);
 const { config } = require(`../index.js`);
 const { emojis } = require(`../config/emojis`);
@@ -17,7 +17,7 @@ module.exports.run = async(client, message, args) => {
     const m = `${message.author} »`;
     let dbUser = await User.findOne({ discordID: message.author.id });
 
-    let oakPickup, birchPickup, sprucePickup, acaciaPickup, expPickup;
+    let oakPickup, birchPickup, sprucePickup, acaciaPickup, expPickup, stringPickup;
     let pickupTxt = `${m} You chopped `;
 
     switch(dbUser.equipped.axe) {
@@ -94,10 +94,11 @@ module.exports.run = async(client, message, args) => {
         case 7:
             sprucePickup = rng(15, 21);
             birchPickup = rng(9, 14);
-            stringPickup = rng(2, 5)
+            stringPickup = rng(2, 5);
 
             dbUser.wood.spruce += sprucePickup;
             dbUser.wood.birch += birchPickup;
+            dbuser.drops.string += stringPickup;
 
             expPickup = rng(100, 120);
             pickupTxt += `${sprucePickup} ${emojis.spruce} and ${birchPickup} ${emojis.birch} with your ${emojis.battleAxe}
