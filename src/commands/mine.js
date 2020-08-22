@@ -2,6 +2,7 @@ const Discord = require(`discord.js`);
 const User = require(`../models/user.model`);
 const { config } = require(`../index.js`);
 const { emojis } = require(`../config/emojis`);
+const { rng } = require(`../config/functions`);
 
 module.exports = {
     name: `mine`,
@@ -10,8 +11,6 @@ module.exports = {
     cooldown: 5,
     aliases: [`m`]
 }
-
-const rng = (min, max) => { return Math.floor(Math.random() * (max + 1 - min) + min); }
 
 module.exports.run = async(client, message, args) => {
     const m = `${message.author} »`;
@@ -92,7 +91,7 @@ module.exports.run = async(client, message, args) => {
     }
 
     dbUser.xp += Math.round(expPickup / 10);
-    dbUser.stats.totalMines += 1;
+    dbUser.stats.totalMines++;
 
     let xpNeeded = Math.floor((100 * Math.E * dbUser.level) / 2);
     if(dbUser.xp > xpNeeded) {

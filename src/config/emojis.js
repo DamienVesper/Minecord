@@ -53,7 +53,7 @@ const emojis = {
     bone: `<:MinecordBone:641363754818338829>`,
     string: `<:MinecordString:641363754667212830>`,
     snowball: `<:MinecordSnowball:652892406265413683>`,
-    pearl: `<:MinecordEnderPearl:676085972076593177>`,
+    enderPearl: `<:MinecordEnderPearl:676085972076593177>`,
     
     heart: `<:MinecordHeart:642724427452252170>`,
     halfHeart: `<:MinecordHalfHeart:642477584642342953>`,
@@ -83,11 +83,11 @@ const emojis = {
     fireAxe: `<:MinecordFireAxe:647545268874510356>`,
     battleAxe: `<:MinecordBattleAxe:648132856580931649>`,
     
-    oakLog: `<:MinecordOakLog:626066849616101379>`,
-    birchLog: `<:MinecordBirchLog:626066849788067840>`,
-    spruceLog: `<:MinecordSpruceLog:626066849892663304>`,
-    jungleLog: `<:MinecordJungleLog:626066849729085461>`,
-    acaciaLog: `<:MinecordAcaciaLog:626066849934868494>`,
+    oak: `<:MinecordOakLog:626066849616101379>`,
+    birch: `<:MinecordBirchLog:626066849788067840>`,
+    spruce: `<:MinecordSpruceLog:626066849892663304>`,
+    jungle: `<:MinecordJungleLog:626066849729085461>`,
+    acacia: `<:MinecordAcaciaLog:626066849934868494>`,
     
     netherStar: `<:MinecordNetherStar:650036408190238742>`,
     charcoal: `<:MinecordCharcoal:650030050883928094>`,

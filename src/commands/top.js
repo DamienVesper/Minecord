@@ -2,6 +2,7 @@ const Discord = require(`discord.js`);
 const User = require(`../models/user.model`);
 const { config } = require(`../index.js`);
 const { emojis } = require(`../config/emojis`);
+const { cleanse, standardize } = require(`../config/functions`);
 
 module.exports = {
     name: `top`,
@@ -9,14 +10,6 @@ module.exports = {
     usage: `<cash | level>`,
     cooldown: null,
     aliases: [`leaderboard`, `lb`]
-}
-
-const cleanse = str => { return str.replace(`\`\`\``, `\\\`\\\`\\\``).replace(`\``, `\\\``).replace(`||`, `\\|\\|`).replace(`_`, `\\_`).replace(`***`, `\\*\\*\\*`).replace(`**`, `\\*\\*`).replace(`*`, `\\*`); }
-const standardize = num => {
-    return Math.abs(Number(num)) >= 1.0e+9 ? (Math.abs(Number(num)) / 1.0e+9).toFixed(2) + "B" :
-        Math.abs(Number(num)) >= 1.0e+6 ? (Math.abs(Number(num)) / 1.0e+6).toFixed(2) + "M" :
-        Math.abs(Number(num)) >= 1.0e+3 ? (Math.abs(Number(num)) / 1.0e+3).toFixed(2) + "K" :
-        Math.abs(Number(num));
 }
 
 const lbs = [`cash`, `level`];
@@ -38,7 +31,7 @@ module.exports.run = async(client, message, args) => {
     let users = await User.find({});
     for(let i in users) {
         let user = users[i];
-        if(client.users.get(user.discordID)) {
+        if(client.users.get(user.discordID) && !config.developerIDs.includes(user.discordID) && !user.banned) {
             lb.push({
                 bal: user.money,
                 discordID: user.discordID,
@@ -48,16 +41,16 @@ module.exports.run = async(client, message, args) => {
     }
     
     switch(args[0]) {
-        case `cash`: case `money`: lb.sort((a, b) => (a.bal <= b.bal) ? 1 : -1); break;
-        case `level`: lb.sort((a, b) => (a.level <= b.level) ? 1 : -1); break;
+        case `cash`: case `money`: lb.sort((a, b) => a.bal - b.bal); break;
+        case `level`: lb.sort((a, b) => a.level - b.level); break;
     }
 
     let lbTxt = ``;
     for(let i = 0; i < (lb.length < 10 ? lb.length: 10); i++) {
         lbTxt += `${i == 0 ? `🥇`: i == 1 ? `🥈`: i == 2 ? `🥉`: `\`${i + 1}\``} - ${cleanse(client.users.get(lb[i].discordID).tag)} - `;
         switch(args[0]) {
-            case `cash`:  case `money`: lbTxt += `$${standardize(lb[i].bal)}`; break;
-            case `level`: lbTxt += lb[i].level; break;
+            case `cash`:  case `money`: lbTxt += `\`$${standardize(lb[i].bal)}\``; break;
+            case `level`: lbTxt += `\`${lb[i].level}\``; break;
         }
         lbTxt += `\n`;
     }
@@ -69,8 +62,7 @@ module.exports.run = async(client, message, args) => {
         .setTimestamp(new Date())
         .setFooter(config.footer);
     
-    let userRank;
-    for(let i = 0; i < lb.length; i++) if(lb[i].id == message.author.id) userRank = i;
+    let userRank = lb.indexOf({ discordID: message.author.id });
     if(userRank > 9) {
         lbTxt += `\n\n🎖️ \`${userRank + 1}\` - ${cleanse(client.users.get(lb[userRank].discordID).tag)}`;
         switch(args[0]) {

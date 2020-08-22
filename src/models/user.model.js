@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     },
     clan: {
         type: Number,
-        required: false
+        required: true
     },
     cooldowns: {
         chop: {
@@ -77,6 +77,14 @@ const userSchema = new mongoose.Schema({
         emerald: {
             type: Number,
             required: true
+        },
+        netherite: {
+            type: Number,
+            required: true
+        },
+        prisms: {
+            type: Number,
+            required: true
         }
     },
     plants: {
@@ -136,6 +144,10 @@ const userSchema = new mongoose.Schema({
             type: Number,
             required: true
         },
+        totalVotes: {
+            type: Number,
+            required: false
+        }
     },
     weapons: {
         swords: {
@@ -156,6 +168,10 @@ const userSchema = new mongoose.Schema({
                 required: true
             },
             diamond: {
+                type: Boolean,
+                required: true
+            },
+            netherite: {
                 type: Boolean,
                 required: true
             }
@@ -180,6 +196,18 @@ const userSchema = new mongoose.Schema({
             diamond: {
                 type: Boolean,
                 required: true
+            },
+            netherite: {
+                type: Boolean,
+                required: true
+            },
+            rainbow: {
+                type: Boolean,
+                required: true
+            },
+            mystery: {
+                type: Boolean,
+                required: true
             }
         },
         axes: {
@@ -200,6 +228,18 @@ const userSchema = new mongoose.Schema({
                 required: true
             },
             diamond: {
+                type: Boolean,
+                required: true
+            },
+            netherite: {
+                type: Boolean,
+                required: true
+            },
+            fire: {
+                type: Boolean,
+                required: true
+            },
+            battle: {
                 type: Boolean,
                 required: true
             }
@@ -225,6 +265,10 @@ const userSchema = new mongoose.Schema({
         jungle: {
             type: Number,
             required: true
+        },
+        charcoal: {
+            type: Number,
+            required: true
         }
     },
     drops: {
@@ -245,6 +289,14 @@ const userSchema = new mongoose.Schema({
             required: true
         },
         enderPearl: {
+            type: Number,
+            required: true
+        },
+        shulkerShells: {
+            type: Number,
+            required: true
+        },
+        netherStars: {
             type: Number,
             required: true
         }

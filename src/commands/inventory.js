@@ -39,7 +39,7 @@ module.exports.run = async(client, message, args) => {
     }
     for(let i in dbUser.wood) {
         let item = dbUser.wood[i];
-        if(typeof item === `number` && item > 0) woodTxt += `${emojis[`${i}Log`]} ${item}\n`;
+        if(typeof item === `number` && item > 0) woodTxt += `${emojis[i]} ${item}\n`;
     }
     for(let i in dbUser.ores) {
         let item = dbUser.ores[i];
@@ -47,7 +47,7 @@ module.exports.run = async(client, message, args) => {
     }
 
     let sEmbed = new Discord.RichEmbed()
-        .setAuthor(`User Inventory | ${message.author.tag}`)
+        .setAuthor(`User Inventory | ${discUser.tag}`)
         .setColor(0xffe200)
         .setTimestamp(new Date())
         .setFooter(config.footer);

@@ -6,7 +6,7 @@ const dotenv = require(`dotenv`).config();
 
 /* Client Config */
 const config = require(`./config/config`);
-const emojis = require(`./config/emojis`)
+const emojis = require(`./config/emojis`);
 const client = new Discord.Client({
     // disableEveryone: true,
     fetchAllMembers: true, 
@@ -29,37 +29,21 @@ const User = require(`./models/user.model`);
 client.on(`ready`, async () => {
     console.log(`${client.user.username}#${client.user.discriminator} has started, with ${client.users.size} users in ${client.guilds.size} servers at ${config.hostname}.`);
     refreshActivity();
-});
-
-/* Client Commands */
-client.events = new Discord.Collection();
-fs.readdir(`${__dirname}/events/`, (err, files) => {
-    if(err) console.error(err);
-
-    let jsFiles = files.filter(f => f.split(`.`).pop() == `js`);
-    if(jsFiles.length <= 0) return console.log(`No events to load!`);
-
-    /* Load Commands */
-    jsFiles.forEach(f => client.events.set(f.split(`.`)[0], require(`./events/${f}`)));
-    // console.log(`[${client.shard.id}]: Loaded ${jsFiles.length} event${jsFiles.length === 1 ? ``: `s`}!`);
-    console.log(`Loaded ${jsFiles.length} event${jsFiles.length === 1 ? null: `s`}!`);
-});
-
-/* Client Commands */
-client.commands = new Discord.Collection();
-fs.readdir(`${__dirname}/commands/`, (err, files) => {
-    if(err) console.error(err);
-
-    let jsFiles = files.filter(f => f.split(`.`).pop() == `js`);
-    if(jsFiles.length <= 0) return console.log(`No commands to load!`);
-
-    /* Load Commands */
-    jsFiles.forEach(f => {
-        let props = require(`./commands/${f}`);
-        client.commands.set(props.name, props);
-    });
-    // console.log(`[${client.shard.id}]: Loaded ${jsFiles.length} command${jsFiles.length === 1 ? ``: `s`}!`);
-    console.log(`Loaded ${jsFiles.length} command${jsFiles.length === 1 ? ``: `s`}!`);
+    
+    let users = await User.find({});
+    users.forEach(user => {
+        user.ores.prisms = 0;
+        user.wood.charcoal = 0;
+        user.drops.netherStars = 0;
+    
+        user.weapons.pickaxes.rainbow = false;
+        user.weapons.pickaxes.mystery = false;
+        user.weapons.axes.fire = false;
+        user.weapons.axes.battle = false;
+    
+    
+        user.save(err => console.log(`[${user.discordID}] ${err ? `Error saving user data.`: `User data saved succesfully.`}`));
+    });    
 });
 
 /* Client Checks */
@@ -76,6 +60,8 @@ const refreshActivity = async() => {
 client.on(`message`, async message => {
     const m = `${message.author} » `;
 
+    if(message.channel.id == `625357023315230764` || (message.guild && message.guild.id == `625357023315230760`)) return;
+    
     /* Botception & Message Handling */
     if(message.author.bot || message.channel.type == `dm`) return;
     if(message.content.slice(0, config.prefix.length).toString().toLowerCase() != config.prefix) return;
@@ -96,10 +82,10 @@ client.on(`message`, async message => {
 
         if(dbUser && command != `start`) {
             if(dbUser.banned) return message.channel.send(`${m} You're banned, fool! <:GetBannedLol:653692630093266949>`);
-            if(message.guild.id == config.mainServerID) {
+            if(message.guild && message.guild.id == `625357023315230760`) {
                 const addRole = roleID => { message.member.addRole(message.guild.roles.get(roleID)); }
                 const roles = [`625451047736836116`, `625451072152141825`, `625451095791108106`, `625451121976147969`, `625451142033309723`];
-                addRole(dbUser.equipped.pickaxe);
+                addRole(roles[dbUser.equipped.pickaxe]);
             }
         }
 
@@ -113,7 +99,7 @@ client.on(`message`, async message => {
     
         try {
             // console.log(`${message.author.tag} ran command ${command} in ${message.guild.name} [${message.guild.id}] on shard ${client.shard.id}.`);
-            console.log(`${message.author.tag} ran command ${command} in ${message.guild.name} [${message.guild.id}].`);
+            console.log(`${message.author.tag} ran command ${command} in ${message.guild ? `${message.guild.name} [${message.guild.id}].`: ``}`);
             cmd.run(client, message, args);
         }
         catch(err) { console.log(`There was an error executing command ${command} by ${message.author.tag}.`);
@@ -121,28 +107,6 @@ client.on(`message`, async message => {
     }
 });
 
-//DBL API
-const dbl = async() => {
-    const DBL = require(`dblapi.js`);
-    const dbl = new DBL(process.env.DBL_TOKEN, {
-            webhookPort: 5000,
-            webhookAuth: process.env.WEBHOOK_AUTH
-        }, client);
-
-    dbl.webhook.on(`ready`, hook => console.log(`Webhook running at https://${hook.hostname}:${hook.port + hook.path}.`));
-    dbl.webhook.on(`vote`, async vote => {
-        let dbUser = await User.findOne({ discordID: vote.user });
-        dbUser.ores.emerald += 10;
-        let voteRewardMsg = `${client.users.get(vote.user).tag} just voted and received 10 emeralds ${emojis.emerald}`
-
-        dbUser.save(err => client.channels.get(`653285446738116608`).send(err ? `There was an error processing a vote.`: voteRewardMsg));
-    });
-
-    let guildCount = await client.shard.fetchClientValues(`guilds.size`);
-    setInterval(() => dbl.postStats(guildCount, client.shards.Id, client.shards.total), 18e5);
-}
 
 client.login(config.token).catch(err => console.error(`Failed to authenticate client with application.`));
 client.setMaxListeners(0);
-
-if(client.shard.id == 0) dbl();

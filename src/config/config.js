@@ -21,7 +21,7 @@ var config = {
         },
         password: process.env.DATABASE_PASSWORD
     },
-    version: `0.0.1b`,
+    version: `4.0.0`,
     footer: `© Minecord 2020`
 }
 

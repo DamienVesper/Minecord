@@ -6,10 +6,10 @@ const { prices } = require(`../config/prices/weapons`);
 
 module.exports = {
     name: `select`,
-    description: `Select a weapon.`,
+    description: `Select a tool.`,
     usage: `<tool> <type>`,
     cooldown: null,
-    aliases: null
+    aliases: [`choose`, `equip`]
 }
 
 const capitalize = str => { return str.replace(/^\w/, f => f.toUpperCase()); }
@@ -17,6 +17,8 @@ const capitalize = str => { return str.replace(/^\w/, f => f.toUpperCase()); }
 module.exports.run = async(client, message, args) => {
     const m = `${message.author} »`;
     let dbUser = await User.findOne({ discordID: message.author.id });
+
+    for(let i=0; i<args.length; i++) { args[i] = args[i].toLowerCase(); }
 
     let wepID = `${args[1]}s`;
     let wepEmoji = emojis[`${args[0]}${args[1] == `pickaxe` ? `Pick`: capitalize(args[1])}`];

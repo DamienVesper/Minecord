@@ -46,7 +46,7 @@ module.exports.run = async(client, message, args) => {
             let reloadedCommand = require(`./${command.name}.js`);
 
             client.commands.set(reloadedCommand.name, reloadedCommand);
-            message.channel.send(`${m} Command \`${command.name}.js\` was reloaded!`)
+            message.channel.send(`${m} Command \`${command.name}.js\` was reloaded.`);
 
             break;
         default: return message.channel.send(`${m} That dev command doesn't exist!`);

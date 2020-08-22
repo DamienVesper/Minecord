@@ -1,7 +1,10 @@
 const Discord = require(`discord.js`);
 const User = require(`../models/user.model`);
+const Clan = require(`../models/clan.model`);
 const { config } = require(`../index.js`);
 const { emojis } = require(`../config/emojis`);
+const { prices } = require(`../config/prices/weapons`);
+const { cleanse, standardize, calculateMaxExp } = require(`../config/functions`);
 
 module.exports = {
     name: `profile`,
@@ -10,8 +13,6 @@ module.exports = {
     cooldown: null,
     aliases: [`p`, `user`, `info`]
 }
-
-let calculateMaxExp = level => { return Math.floor((100 * Math.E * level) / 2); }
 
 module.exports.run = async(client, message, args) => {
     const m = `${message.author} »`;
@@ -31,44 +32,25 @@ module.exports.run = async(client, message, args) => {
     let dbUser = await User.findOne({ discordID: discUser.id });
     if(!dbUser) return message.channel.send(`${m} That user doesn't have an account!`);
 
-    let toolsText = ``;
-    switch(dbUser.equipped.sword) {
-        case 0: toolsText += emojis.woodSword; break;
-        case 1: toolsText += emojis.stoneSword; break;
-        case 2: toolsText += emojis.ironSword; break;
-        case 3: toolsText += emojis.goldSword; break;
-        case 4: toolsText += emojis.diamondSword; break;
-    }
-    switch(dbUser.equipped.pickaxe) {
-        case 0: toolsText += emojis.woodPick; break;
-        case 1: toolsText += emojis.stonePick; break;
-        case 2: toolsText += emojis.ironPick; break;
-        case 3: toolsText += emojis.goldPick; break;
-        case 4: toolsText += emojis.diamondPick; break;
-    }
-    switch(dbUser.equipped.axe) {
-        case 0: toolsText += emojis.woodAxe; break;
-        case 1: toolsText += emojis.stoneAxe; break;
-        case 2: toolsText += emojis.ironAxe; break;
-        case 3: toolsText += emojis.goldAxe; break;
-        case 4: toolsText += emojis.diamondAxe; break;
-    }
+    let toolsTxt = ``;
+    toolsTxt += emojis[`${Object.keys(prices.swords)[dbUser.equipped.sword]}Sword`];
+    toolsTxt += emojis[`${Object.keys(prices.pickaxes)[dbUser.equipped.pickaxe]}Pick`];
+    toolsTxt += emojis[`${Object.keys(prices.axes)[dbUser.equipped.axe]}Axe`];
+
+    let clan = dbUser.clan ? await Clan.findById(dbUser.clan): null;
 
     let sEmbed = new Discord.RichEmbed()
-        .setAuthor(`User Profile | ${discUser.tag}`, discUser.avatarURL)
-        .setColor(0xcfcf53)
-        .addField(`Weapons & Value`, `
-            Tools: ${toolsText}
-            Money: $${dbUser.money}
+    .setColor(0xcfcf53)
+    .setAuthor(`User Profile | ${discUser.tag}`, discUser.avatarURL)
+        .setDescription(`
+        ${clan ? `Clan: ${cleanse(clan.name)}`: `This user is not in a clan!`}
 
-            Level: ${dbUser.level}
-            XP: ${Math.round(dbUser.xp)} / ${calculateMaxExp(dbUser.level)}
-        `, true)
-        .addField(`Stats`, `
-            Times Mined: ${dbUser.stats.totalMines}
-            Times Chopped: ${dbUser.stats.totalChops}
-            Times Fought: ${dbUser.stats.totalFights}
-        `, true)
+        Tools: ${toolsTxt}
+        Money: $${standardize(dbUser.money)}
+
+        Level: ${dbUser.level}
+        XP: ${standardize(Math.round(dbUser.xp))} / ${standardize(calculateMaxExp(dbUser.level))}
+        `)
         .setTimestamp(new Date())
         .setFooter(config.footer);
     return message.channel.send(sEmbed);

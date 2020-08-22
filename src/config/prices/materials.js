@@ -19,10 +19,10 @@ const prices = {
     melonSeeds: 15,
 
     rottenFlesh: 6,
-    string: 7,
-    bones: 9,
-    gunpowder: 11,
-    pearls: 15,
+    string: 9,
+    bone: 13,
+    gunpowder: 15,
+    enderPearl: 22,
 
     pork: 100,
     rainbows: 70,
@@ -32,7 +32,8 @@ const prices = {
     snow: 120,
 
     obsidian: 1000,
-    pearls: 50
+
+    money: 1
 }
 
 module.exports = { prices }
