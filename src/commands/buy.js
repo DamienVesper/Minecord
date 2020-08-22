@@ -43,9 +43,11 @@ module.exports.run = async(client, message, args) => {
 
     if(dbUser.weapons[priceTool][args[0]]) return message.channel.send(`${m} You already own that weapon!`);
     if(item[1] === `cash` && dbUser.money < item[0]) return message.channel.send(`${m} You don't have enough money for this item!`);
+    if(item[1] === `emerald` && dbUser.ores.emerald < item[0]) return message.channel.send(`${m} You don't have enough emeralds ${emoji.emerald} for this item!`);
 
     dbUser.weapons[priceTool][args[0]] = true;
-    dbUser.money -= item[0];
+    if(item[1] === `cash`) dbUser.money -= item[0];
+    if(item[1] === `emerald`) dbUser.ores.emerald -= item[0];
 
     dbUser.save(err => message.channel.send(`${m} ${err ? `There was an error executing that command`: `You have succesfully bought ${emojis[args[0] + emojiSuffix]} for ${item[1] == `cash` ? `$`: ``}${item[0]}${item[1] != `cash` ? ` ${emojis[item[1]]}`: ``}`}.`));
 }

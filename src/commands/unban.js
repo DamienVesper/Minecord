@@ -16,7 +16,7 @@ const cleanse = str => { return str.replace(`\`\`\``, `\\\`\\\`\\\``).replace(`\
 
 module.exports.run = async(client, message, args) => {
     const m = `${message.author} »`;
-    if(!config.developerIDs.includes(message.author.id)) return message.channel.send(`${m} You can't use that!`);
+    if(!config.developerIDs.includes(message.author.id) && !message.member.hasRole(`681226895349645314`)) return message.channel.send(`${m} You can't use that!`);
 
     let discUser;
     if(args[0]) {
