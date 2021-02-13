@@ -1,10 +1,10 @@
 const User = require(`../models/user.model`);
 
-const Discord = require(`discord.js`)
+const Discord = require(`discord.js`);
 const { config, client } = require(`../index.js`);
 
 client.on(`guildRemove`, guild => {
-    let sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.RichEmbed()
         .setColor(0xff0000)
         .setAuthor(`Left a Server`)
         .setDescription(`

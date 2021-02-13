@@ -9,9 +9,9 @@ module.exports = {
     usage: null,
     cooldown: null,
     aliases: null
-}
+};
 
-module.exports.run = async(client, message, args) => {
+module.exports.run = async (client, message, args) => {
     const m = `${message.author} »`;
-    let dbUser = await User.findOne({ discordID: message.author.id });
-}
+    const dbUser = await User.findOne({ discordID: message.author.id });
+};

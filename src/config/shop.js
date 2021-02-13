@@ -5,5 +5,5 @@ const assigner = {
         axes: `Axe`
     },
     shops: [`Swords`, `Pickaxes`, `Axes`]
-}
-module.exports = { assigner }
+};
+module.exports = { assigner };

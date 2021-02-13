@@ -10,16 +10,16 @@ module.exports = {
     usage: null,
     cooldown: 30,
     aliases: [`c`]
-}
+};
 
-module.exports.run = async(client, message, args) => {
+module.exports.run = async (client, message, args) => {
     const m = `${message.author} »`;
-    let dbUser = await User.findOne({ discordID: message.author.id });
+    const dbUser = await User.findOne({ discordID: message.author.id });
 
     let oakPickup, birchPickup, sprucePickup, acaciaPickup, expPickup;
     let pickupTxt = `${m} You chopped `;
 
-    switch(dbUser.equipped.axe) {
+    switch (dbUser.equipped.axe) {
         case 0:
             oakPickup = rng(5, 7);
 
@@ -60,7 +60,7 @@ module.exports.run = async(client, message, args) => {
             break;
         case 4:
             acaciaPickup = rng(20, 40);
-            junglePickup = rng(60, 80)
+            junglePickup = rng(60, 80);
 
             dbUser.wood.acacia += acaciaPickup;
             dbUser.wood.jungle += junglePickup;
@@ -73,5 +73,5 @@ module.exports.run = async(client, message, args) => {
     dbUser.xp += Math.round(expPickup / 10);
     dbUser.stats.totalChops++;
 
-    dbUser.save(err => message.channel.send(err ? `${m} There was an error executing that command.`: pickupTxt));
-}
+    dbUser.save(err => message.channel.send(err ? `${m} There was an error executing that command.` : pickupTxt));
+};

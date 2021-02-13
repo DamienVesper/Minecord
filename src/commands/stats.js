@@ -12,38 +12,38 @@ module.exports = {
     usage: null,
     cooldown: null,
     aliases: [`p`, `user`, `info`]
-}
+};
 
-module.exports.run = async(client, message, args) => {
+module.exports.run = async (client, message, args) => {
     const m = `${message.author} »`;
 
     let discUser;
-    if(args[0]) {
+    if (args[0]) {
         discUser = message.mentions.members.first();
-        if(!discUser) {
+        if (!discUser) {
             discUser = args[0];
-            if(isNaN(parseInt(discUser))) return message.channel.send(`${m} That is an invalid user ID!`);
+            if (isNaN(parseInt(discUser))) return message.channel.send(`${m} That is an invalid user ID!`);
             discUser = client.users.get(discUser);
         }
         else discUser = discUser.user;
     }
     else discUser = message.author;
 
-    let dbUser = await User.findOne({ discordID: discUser.id });
-    if(!dbUser) return message.channel.send(`${m} That user doesn't have an account!`);
+    const dbUser = await User.findOne({ discordID: discUser.id });
+    if (!dbUser) return message.channel.send(`${m} That user doesn't have an account!`);
 
     let toolsTxt = ``;
     toolsTxt += emojis[`${Object.keys(prices.swords)[dbUser.equipped.sword]}Sword`];
     toolsTxt += emojis[`${Object.keys(prices.pickaxes)[dbUser.equipped.pickaxe]}Pick`];
     toolsTxt += emojis[`${Object.keys(prices.axes)[dbUser.equipped.axe]}Axe`];
 
-    let clan = dbUser.clan ? await Clan.findById(dbUser.clan): null;
+    const clan = dbUser.clan ? await Clan.findById(dbUser.clan) : null;
 
-    let sEmbed = new Discord.RichEmbed()
-    .setColor(0xcfcf53)
-    .setAuthor(`User Profile | ${discUser.tag}`, discUser.avatarURL)
+    const sEmbed = new Discord.RichEmbed()
+        .setColor(0xcfcf53)
+        .setAuthor(`User Profile | ${discUser.tag}`, discUser.avatarURL)
         .setDescription(`
-        ${clan ? `Clan: ${cleanse(clan.name)}`: `This user is not in a clan!`}
+        ${clan ? `Clan: ${cleanse(clan.name)}` : `This user is not in a clan!`}
 
         Tools: ${toolsTxt}
         Money: $${standardize(dbUser.money)}
@@ -54,4 +54,4 @@ module.exports.run = async(client, message, args) => {
         .setTimestamp(new Date())
         .setFooter(config.footer);
     return message.channel.send(sEmbed);
-}
+};

@@ -16,7 +16,7 @@ const clanHelp = [
     [`rename`, `Rename your clan for $50,000`, [`name`]],
     [`description`, `Change your clan's description`, [`description`]],
     [`image`, `Change your clan image for $50,000`, [`image_link`]],
-    [`color`, `Change the color of your clan`, [`hexadecimal`]],
+    [`color`, `Change the color of your clan`, [`hexadecimal`]]
 ];
 
-module.exports = { clanHelp }
+module.exports = { clanHelp };

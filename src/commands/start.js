@@ -9,13 +9,13 @@ module.exports = {
     usage: null,
     cooldown: null,
     aliases: null
-}
+};
 
-module.exports.run = async(client, message, args) => {
+module.exports.run = async (client, message, args) => {
     const m = `${message.author} »`;
 
-    const userHasRegistered = await User.findOne({ discordID : message.author.id });
-    if(userHasRegistered) return message.channel.send(`${m} You already have an account!`)
+    const userHasRegistered = await User.findOne({ discordID: message.author.id });
+    if (userHasRegistered) return message.channel.send(`${m} You already have an account!`);
     const user = new User({
         banned: false,
         cooldowns: {
@@ -104,6 +104,8 @@ module.exports.run = async(client, message, args) => {
         xp: 0,
         level: 0
     });
-    user.save(err => err ? message.channel.send(`${m} There was an error executing that command.`): message.channel.send(`${m} You have received your ${emojis.woodSword} ${emojis.woodPick} ${emojis.woodAxe}.
+    user.save(err => err
+        ? message.channel.send(`${m} There was an error executing that command.`)
+        : message.channel.send(`${m} You have received your ${emojis.woodSword} ${emojis.woodPick} ${emojis.woodAxe}.
 Type \`m!mine\` \`m!fight\` \`m!chop\` to use them!`));
-}
+};

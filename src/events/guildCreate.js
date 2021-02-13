@@ -1,10 +1,10 @@
 const User = require(`../models/user.model`);
 
-const Discord = require(`discord.js`)
+const Discord = require(`discord.js`);
 const { config, client } = require(`../index.js`);
 
 client.on(`guildCreate`, guild => {
-    let sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.RichEmbed()
         .setColor(0x00ff00)
         .setAuthor(`Joined a Server`)
         .setDescription(`

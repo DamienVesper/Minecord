@@ -11,7 +11,7 @@ const prices = {
 
         // christmas: [1e3, `candy`],
         // dragon: [20, `lapis`],
-        // corona: [1e3, `germs`]        
+        // corona: [1e3, `germs`]
     },
     pickaxes: {
         wood: [``],
@@ -42,6 +42,6 @@ const prices = {
         // inferno: [1e8, `cash`],
 
     }
-}
+};
 
-module.exports = { prices }
+module.exports = { prices };

@@ -10,22 +10,22 @@ module.exports = {
     usage: `<tool> <type>`,
     cooldown: null,
     aliases: [`choose`, `equip`]
-}
+};
 
-const capitalize = str => { return str.replace(/^\w/, f => f.toUpperCase()); }
+const capitalize = str => { return str.replace(/^\w/, f => f.toUpperCase()); };
 
-module.exports.run = async(client, message, args) => {
+module.exports.run = async (client, message, args) => {
     const m = `${message.author} »`;
-    let dbUser = await User.findOne({ discordID: message.author.id });
+    const dbUser = await User.findOne({ discordID: message.author.id });
 
-    for(let i=0; i<args.length; i++) { args[i] = args[i].toLowerCase(); }
+    for (let i = 0; i < args.length; i++) { args[i] = args[i].toLowerCase(); }
 
-    let wepID = `${args[1]}s`;
-    let wepEmoji = emojis[`${args[0]}${args[1] == `pickaxe` ? `Pick`: capitalize(args[1])}`];
+    const wepID = `${args[1]}s`;
+    const wepEmoji = emojis[`${args[0]}${args[1] == `pickaxe` ? `Pick` : capitalize(args[1])}`];
 
-    if(args[0] != `wood` && (!prices[wepID] || !prices[wepID][args[0]])) return message.channel.send(`${m} That weapon doesn't exist!`)
-    else if(!dbUser.weapons[wepID][args[0]]) return message.channel.send(`${m} You don't own that ${args[1]}!`);
+    if (args[0] != `wood` && (!prices[wepID] || !prices[wepID][args[0]])) return message.channel.send(`${m} That weapon doesn't exist!`);
+    else if (!dbUser.weapons[wepID][args[0]]) return message.channel.send(`${m} You don't own that ${args[1]}!`);
 
     dbUser.equipped[args[1]] = (Object.keys(prices[wepID]).indexOf(args[0])) + 1;
-    dbUser.save(err => message.channel.send(`${m} ${err ? `There was an error executing that command.`: `You have selected the ${capitalize(args[0])} ${capitalize(args[1])} ${wepEmoji}`}`));
-}
+    dbUser.save(err => message.channel.send(`${m} ${err ? `There was an error executing that command.` : `You have selected the ${capitalize(args[0])} ${capitalize(args[1])} ${wepEmoji}`}`));
+};

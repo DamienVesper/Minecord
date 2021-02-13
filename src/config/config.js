@@ -1,6 +1,6 @@
 const dotenv = require(`dotenv`).config();
 
-var config = {
+const config = {
     colors: {
         success: 0x00ff00,
         primary: 0x1e90ff,
@@ -8,10 +8,10 @@ var config = {
         danger: 0xff0000
     },
     developer: `DamienVesper`,
-	developerTag: `2257`,
+    developerTag: `2257`,
     developerIDs: [`386940319666667521`, `125016735660113920`],
     hostname: `gateway.discord.gg`,
-	prefix: `m!`,
+    prefix: `m!`,
     token: process.env.DISCORD_BOT_TOKEN,
     db: {
         uri: process.env.DATABASE_URI,
@@ -23,7 +23,7 @@ var config = {
     },
     version: `4.0.0`,
     footer: `© Minecord 2020`
-}
+};
 
 config.footer += ` | v${config.version}`;
 module.exports = config;

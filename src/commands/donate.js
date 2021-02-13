@@ -9,13 +9,13 @@ module.exports = {
     usage: null,
     cooldown: null,
     aliases: null
-}
+};
 
-module.exports.run = async(client, message, args) => {
+module.exports.run = async (client, message, args) => {
     const m = `${message.author} »`;
-    let dbUser = await User.findOne({ discordID: message.author.id });
+    const dbUser = await User.findOne({ discordID: message.author.id });
 
-    let sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.RichEmbed()
         .setColor(0xffa500)
         .setAuthor(`Donate to Minecord`)
         .setThumbnail(`https://cdn.glitch.com/12fce8e2-cbfb-4596-aeea-096e3feba0df%2F669963346530795526.png?v=1579820875106`)
@@ -23,4 +23,4 @@ module.exports.run = async(client, message, args) => {
         .setTimestamp(new Date())
         .setFooter(config.footer);
     return message.channel.send(sEmbed);
-}
+};

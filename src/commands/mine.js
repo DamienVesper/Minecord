@@ -10,16 +10,16 @@ module.exports = {
     usage: null,
     cooldown: 5,
     aliases: [`m`]
-}
+};
 
-module.exports.run = async(client, message, args) => {
+module.exports.run = async (client, message, args) => {
     const m = `${message.author} »`;
-    let dbUser = await User.findOne({ discordID: message.author.id });
+    const dbUser = await User.findOne({ discordID: message.author.id });
 
     let stonePickup, coalPickup, ironPickup, goldPickup, diamondPickup, expPickup;
     let pickupTxt = `${m} You mined `;
 
-    switch(dbUser.equipped.pickaxe) {
+    switch (dbUser.equipped.pickaxe) {
         case 0:
             stonePickup = rng(5, 8);
             coalPickup = rng(1, 3);
@@ -93,12 +93,12 @@ module.exports.run = async(client, message, args) => {
     dbUser.xp += Math.round(expPickup / 10);
     dbUser.stats.totalMines++;
 
-    let xpNeeded = Math.floor((100 * Math.E * dbUser.level) / 2);
-    if(dbUser.xp > xpNeeded) {
+    const xpNeeded = Math.floor((100 * Math.E * dbUser.level) / 2);
+    if (dbUser.xp > xpNeeded) {
         dbUser.level++;
         dbUser.xp -= xpNeeded;
         dbUser.ores.emerald += dbUser.level;
         message.channel.send(`${m} You just leveled up to level **${dbUser.level}**! You have received ${dbUser.level + emojis.emerald}!`);
     }
-    dbUser.save(err => message.channel.send(err ? `${m} There was an error executing that command.`: pickupTxt));
-}
+    dbUser.save(err => message.channel.send(err ? `${m} There was an error executing that command.` : pickupTxt));
+};

@@ -11,7 +11,7 @@ const prices = {
     spruce: 14,
     jungle: 6,
     acacia: 30,
-    
+
     wheat: 6,
     wheatSeeds: 7,
     potatoes: 10,
@@ -34,6 +34,6 @@ const prices = {
     obsidian: 1000,
 
     money: 1
-}
+};
 
-module.exports = { prices }
+module.exports = { prices };

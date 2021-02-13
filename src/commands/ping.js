@@ -8,14 +8,14 @@ module.exports = {
     usage: null,
     cooldown: null,
     aliases: null
-}
+};
 
-module.exports.run = async(client, message, args) => {
+module.exports.run = async (client, message, args) => {
     const m = `${message.author} »`;
 
-    let msg = await message.channel.send(`Ping?`);
+    const msg = await message.channel.send(`Ping?`);
 
-    let sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.RichEmbed()
         .setColor(0xffa500)
         .setAuthor(`Client Latency`)
         .setDescription(`
@@ -25,4 +25,4 @@ module.exports.run = async(client, message, args) => {
         .setTimestamp(new Date())
         .setFooter(config.footer);
     msg.edit(sEmbed);
-}
+};

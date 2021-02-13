@@ -10,16 +10,16 @@ module.exports = {
     usage: `<type> <tool>`,
     cooldown: null,
     aliases: null
-}
+};
 
-module.exports.run = async(client, message, args) => {
+module.exports.run = async (client, message, args) => {
     const m = `${message.author} »`;
-    let dbUser = await User.findOne({ discordID: message.author.id });
+    const dbUser = await User.findOne({ discordID: message.author.id });
 
     let toolType, priceTool, emojiSuffix;
-    switch(args[1]) {
+    switch (args[1]) {
         case `sword`:
-            priceTool = `swords`;            
+            priceTool = `swords`;
             toolType = `Sword`;
             emojiSuffix = `Sword`;
             break;
@@ -35,19 +35,18 @@ module.exports.run = async(client, message, args) => {
             break;
     }
 
-    if(!prices[priceTool]) return message.channel.send(`${m} That tool doesn't exist!`);
+    if (!prices[priceTool]) return message.channel.send(`${m} That tool doesn't exist!`);
 
+    const item = prices[priceTool][args[0]];
+    if (!item) return message.channel.send(`${m} That tool doesn't exist!`);
 
-    let item = prices[priceTool][args[0]];
-    if(!item) return message.channel.send(`${m} That tool doesn't exist!`);
-
-    if(dbUser.weapons[priceTool][args[0]]) return message.channel.send(`${m} You already own that weapon!`);
-    if(item[1] === `cash` && dbUser.money < item[0]) return message.channel.send(`${m} You don't have enough money for this item!`);
-    if(item[1] === `emerald` && dbUser.ores.emerald < item[0]) return message.channel.send(`${m} You don't have enough emeralds ${emoji.emerald} for this item!`);
+    if (dbUser.weapons[priceTool][args[0]]) return message.channel.send(`${m} You already own that weapon!`);
+    if (item[1] === `cash` && dbUser.money < item[0]) return message.channel.send(`${m} You don't have enough money for this item!`);
+    if (item[1] === `emerald` && dbUser.ores.emerald < item[0]) return message.channel.send(`${m} You don't have enough emeralds ${emoji.emerald} for this item!`);
 
     dbUser.weapons[priceTool][args[0]] = true;
-    if(item[1] === `cash`) dbUser.money -= item[0];
-    if(item[1] === `emerald`) dbUser.ores.emerald -= item[0];
+    if (item[1] === `cash`) dbUser.money -= item[0];
+    if (item[1] === `emerald`) dbUser.ores.emerald -= item[0];
 
-    dbUser.save(err => message.channel.send(`${m} ${err ? `There was an error executing that command`: `You have succesfully bought ${emojis[args[0] + emojiSuffix]} for ${item[1] == `cash` ? `$`: ``}${item[0]}${item[1] != `cash` ? ` ${emojis[item[1]]}`: ``}`}.`));
-}
+    dbUser.save(err => message.channel.send(`${m} ${err ? `There was an error executing that command` : `You have succesfully bought ${emojis[args[0] + emojiSuffix]} for ${item[1] == `cash` ? `$` : ``}${item[0]}${item[1] != `cash` ? ` ${emojis[item[1]]}` : ``}`}.`));
+};
