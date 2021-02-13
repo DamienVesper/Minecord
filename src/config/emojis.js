@@ -102,7 +102,6 @@ const emojis = {
     goldArmor: `<:MinecordGoldArmor:670663178069213235>`,
     diamondArmor: `<:MinecordDiamondArmor:670663176236302357>`,
 
-
     obsidian: `<:MinecordObsidian:670697997578797087>`,
 
     blueCandy: `<:MinecordCandyBlue:650799249713528832>`,
