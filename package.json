@@ -1,15 +1,12 @@
 {
-  "name": "tornbot",
+  "name": "minecord",
   "version": "1.0.0",
-  "description": "A Discord bot for the game Torn.Space.",
+  "description": "A Discord bot for mining.",
   "main": "runtime.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "express --view=pug _site",
-    "start": "node runtime.js"
-  },
-  "engines": {
-    "node": "11.x"
+    "prod": "pm2 start runtime.js",
+    "dev": "node runtime.js"
   },
   "repository": {
     "type": "git",
