@@ -24,6 +24,7 @@ const emojis = {
     christmasSword: `<:MinecordChristmasSword:648243558645497886>`,
     dragonSlayer: `<:MinecordDragonSlayer:676078841969639435>`,
     coronaSword: `<:MinecordCoronavirusSword:688387167910625293>`,
+    infernoSword: `<:MinecordInfernoSword:669996018112135248>`,
 
     zombie: `<:MinecordZombie:640527212004769822>`,
     husk: `<:MinecordHusk:640538436427841566>`,
@@ -82,6 +83,7 @@ const emojis = {
     rainbowAxe: `<:MinecordRainbowAxe:645021904737927201>`,
     fireAxe: `<:MinecordFireAxe:647545268874510356>`,
     battleAxe: `<:MinecordBattleAxe:648132856580931649>`,
+    infernoAxe: `<:MinecordInfernoAxe:669996018087231557>`,
 
     oak: `<:MinecordOakLog:626066849616101379>`,
     birch: `<:MinecordBirchLog:626066849788067840>`,
@@ -100,12 +102,8 @@ const emojis = {
     goldArmor: `<:MinecordGoldArmor:670663178069213235>`,
     diamondArmor: `<:MinecordDiamondArmor:670663176236302357>`,
 
-    infernoPick: `<:MinecordInfernoPickaxe:669963346530795526>`,
-    infernoSword: `<:MinecordInfernoSword:669996018112135248>`,
-    infernoAxe: `<:MinecordInfernoAxe:669996018087231557>`,
 
     obsidian: `<:MinecordObsidian:670697997578797087>`,
-    lapis: `<:MinecordLapis:625366519827791882>`,
 
     blueCandy: `<:MinecordCandyBlue:650799249713528832>`,
     greenCandy: `<:MinecordCandyGreen:650799249469997057>`,
