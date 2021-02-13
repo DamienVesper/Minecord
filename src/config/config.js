@@ -1,4 +1,4 @@
-const dotenv = require(`dotenv`).config();
+require(`dotenv`).config();
 
 const config = {
     colors: {
@@ -8,9 +8,8 @@ const config = {
         danger: 0xff0000
     },
     developer: `DamienVesper`,
-    developerTag: `2257`,
-    developerIDs: [`386940319666667521`, `125016735660113920`],
-    hostname: `gateway.discord.gg`,
+    developerTag: `0001`,
+    developerIDs: [`386940319666667521`],
     prefix: `m!`,
     token: process.env.DISCORD_BOT_TOKEN,
     db: {
@@ -21,8 +20,8 @@ const config = {
         },
         password: process.env.DATABASE_PASSWORD
     },
-    version: `4.0.0`,
-    footer: `© Minecord 2020`
+    version: `1.0.0`,
+    footer: `© Minecord 2021`
 };
 
 config.footer += ` | v${config.version}`;

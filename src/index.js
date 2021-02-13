@@ -23,7 +23,7 @@ const User = require(`./models/user.model`);
 
 /* Client Events */
 client.on(`ready`, async () => {
-    console.log(`${client.user.username}#${client.user.discriminator} has started, with ${client.users.size} users in ${client.guilds.size} servers at ${config.hostname}.`);
+    console.log(`${client.user.username}#${client.user.discriminator} has started, with ${client.users.size} users in ${client.guilds.size} servers.`);
     refreshActivity();
 
     const users = await User.find({});
