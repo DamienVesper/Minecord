@@ -1,12 +1,8 @@
-/* Network-Installed Dependencies */
 const Discord = require(`discord.js`);
-const Math = require(`math.js`);
-const fs = require(`fs`);
-const dotenv = require(`dotenv`).config();
+require(`dotenv`).config();
 
 /* Client Config */
 const config = require(`./config/config`);
-const emojis = require(`./config/emojis`);
 const client = new Discord.Client({
     // disableEveryone: true,
     fetchAllMembers: true,
@@ -59,11 +55,11 @@ const refreshActivity = async () => {
 client.on(`message`, async message => {
     const m = `${message.author} » `;
 
-    if (message.channel.id == `625357023315230764` || (message.guild && message.guild.id == `625357023315230760`)) return;
+    if (message.channel.id === `625357023315230764` || (message.guild && message.guild.id === `625357023315230760`)) return;
 
     /* Botception & Message Handling */
-    if (message.author.bot || message.channel.type == `dm`) return;
-    if (message.content.slice(0, config.prefix.length).toString().toLowerCase() != config.prefix) return;
+    if (message.author.bot || message.channel.type === `dm`) return;
+    if (message.content.slice(0, config.prefix.length).toString().toLowerCase() !== config.prefix) return;
     //  if(!message.content.toLowerCase().startsWith(config.prefix)) return;
 
     /* Get Commands & Arguments */
@@ -78,11 +74,11 @@ client.on(`message`, async message => {
     if ((cmd.usage) && args.length < (cmd.usage.split(`<`).length) - 1) return message.channel.send(`${message.author} Proper usage is \`${config.prefix + cmd.name} ${cmd.usage}\`.`);
     else {
         const dbUser = await User.findOne({ discordID: message.author.id });
-        if (!dbUser && command != `start` && command != `help`) return message.channel.send(`${m} You don't have an account yet!\n Do \`${config.prefix}start\` to begin your adventure!`);
+        if (!dbUser && command !== `start` && command !== `help`) return message.channel.send(`${m} You don't have an account yet!\n Do \`${config.prefix}start\` to begin your adventure!`);
 
-        if (dbUser && command != `start`) {
+        if (dbUser && command !== `start`) {
             if (dbUser.banned) return message.channel.send(`${m} You're banned, fool! <:GetBannedLol:653692630093266949>`);
-            if (message.guild && message.guild.id == `625357023315230760`) {
+            if (message.guild && message.guild.id === `625357023315230760`) {
                 const addRole = roleID => { message.member.addRole(message.guild.roles.get(roleID)); };
                 const roles = [`625451047736836116`, `625451072152141825`, `625451095791108106`, `625451121976147969`, `625451142033309723`];
                 addRole(roles[dbUser.equipped.pickaxe]);
@@ -107,5 +103,4 @@ client.on(`message`, async message => {
     }
 });
 
-client.login(config.token).catch(err => console.error(`Failed to authenticate client with application.`));
-client.setMaxListeners(0);
+client.login(config.token).catch(() => console.error(`Failed to authenticate client with application.`));
