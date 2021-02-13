@@ -24,27 +24,14 @@
   },
   "homepage": "https://github.com/DamienVesper/Minecord#readme",
   "dependencies": {
-    "axios": "^0.19.2",
-    "cookie-parser": "^1.4.4",
-    "core-js": "^3.6.4",
-    "dblapi.js": "^2.4.0",
+    "axios": "^0.21.1",
+    "dblapi.js": "^2.4.1",
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
-    "events": "^3.1.0",
     "express": "^4.17.1",
-    "ffmpeg": "0.0.4",
-    "fs": "^0.0.2",
-    "http-errors": "^1.7.3",
-    "json": "^9.0.6",
     "math.js": "^1.1.46",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
-    "morgan": "^1.9.1",
-    "node-opus": "^0.3.2",
-    "pug": "^2.0.4",
-    "request": "^2.88.2",
-    "sqlite3": "^4.1.1",
-    "util": "^0.12.1",
-    "ytdl-core": "^2.0.0"
+    "sqlite3": "^4.1.1"
   }
 }
