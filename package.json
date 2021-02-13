@@ -31,7 +31,6 @@
     "express": "^4.17.1",
     "math.js": "^1.1.46",
     "mongodb": "^3.5.5",
-    "mongoose": "^5.9.7",
-    "sqlite3": "^4.1.1"
+    "mongoose": "^5.9.7"
   }
 }
