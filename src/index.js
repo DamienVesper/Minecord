@@ -1,7 +1,11 @@
+const fs = require(`fs`);
+const path = require(`path`);
+
 const Discord = require(`discord.js`);
+
 require(`dotenv`).config();
 
-/* Client Config */
+// Client configuration.
 const config = require(`./config/config.js`);
 
 const client = new Discord.Client({
@@ -12,6 +16,19 @@ const client = new Discord.Client({
 
 const mongoose = require(`mongoose`);
 mongoose.connect(config.db.uri, config.db.uriParams).then(() => console.log(`Succesfully connected Mongoose to MongoDB.`)).catch(err => console.error(err));
+
+// Arbitrary command loader.
+client.commands = new Discord.Collection();
+fs.readdir(path.resolve(__dirname, `commands`), (err, files) => {
+    if (err) return console.error(err);
+
+    files.forEach(f => {
+        const props = require(`./commands/${f}`);
+        client.commands.set(props.name, props);
+    });
+
+    console.log(`Loaded ${files.length} command${files.length === 1 ? `` : `s`}!`);
+});
 
 module.exports = {
     config,
