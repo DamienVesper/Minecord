@@ -76,5 +76,5 @@ module.exports = {
 
     toCapitalStringFromArray: array => array.join(``).toString().replace(/^\w/, f => f.toUpperCase()).split(/(?=[A-Z])/).join(` `),
 
-    addCommaSeparators: num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, `,`);
+    addCommaSeparators: num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, `,`)
 };

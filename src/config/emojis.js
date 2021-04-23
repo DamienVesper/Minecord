@@ -118,4 +118,4 @@ const emojis = {
 
     paper: `<:MinecordPaper:686277872968925278>`
 };
-module.exports = { emojis };
+module.exports = emojis;

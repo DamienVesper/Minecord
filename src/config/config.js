@@ -1,5 +1,7 @@
 require(`dotenv`).config();
 
+const pjson = require(`../../package.json`);
+
 const config = {
     colors: {
         success: 0x00ff00,
@@ -7,11 +9,12 @@ const config = {
         warning: 0xffa500,
         danger: 0xff0000
     },
-    developer: `DamienVesper`,
-    developerTag: `0001`,
+
     developerIDs: [`386940319666667521`],
+
     prefix: `m!`,
     token: process.env.DISCORD_BOT_TOKEN,
+
     db: {
         uri: process.env.DATABASE_URI,
         uriParams: {
@@ -20,9 +23,8 @@ const config = {
         },
         password: process.env.DATABASE_PASSWORD
     },
-    version: `1.0.0`,
-    footer: `Created by DamienVesper#0001`
+
+    footer: `Created by DamienVesper#0001 | ${pjson.version}`
 };
 
-config.footer += ` | v${config.version}`;
 module.exports = config;
