@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/DamienVesper/Minecord#readme",
   "dependencies": {
-    "discord.js": "11.5.1",
+    "discord.js": "^12.5.3",
     "dotenv": "^8.2.0",
     "mongoose": "^5.12.5"
   },
