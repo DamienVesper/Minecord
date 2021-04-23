@@ -20,13 +20,13 @@ module.exports = {
 
 const User = require(`./models/user.model.js`);
 
-/* Client Events */
+// Client events.
 client.on(`ready`, async () => {
-    console.log(`${client.user.tag} has started, with ${client.users.size} users in ${client.guilds.size} servers.`);
+    console.log(`${client.user.tag} has started, with ${client.users.cache.size} users in ${client.guilds.cache.size} servers.`);
     refreshActivity();
 });
 
-/* Client Checks */
+// Refreshing the client activity.
 const refreshActivity = async () => {
     client.user.setPresence({
         game: {
