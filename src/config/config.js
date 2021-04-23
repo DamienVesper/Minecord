@@ -16,4 +16,4 @@ const config = {
     footer: `Created by DamienVesper#0001 | ${pjson.version}`
 };
 
-module.exports = config;
+module.exports = { config };

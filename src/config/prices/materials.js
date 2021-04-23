@@ -36,4 +36,4 @@ const prices = {
     money: 1
 };
 
-module.exports = prices;
+module.exports = { prices };

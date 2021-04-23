@@ -3,9 +3,9 @@ const Discord = require(`discord.js`);
 const User = require(`../models/user.model`);
 const Clan = require(`../models/clan.model`);
 
-const config = require(`../index.js`);
+const { config } = require(`../index.js`);
 
-const clanHelp = require(`../config/clanHelp`);
+const { clanHelp } = require(`../config/clanHelp`);
 const { cleanse } = require(`../config/functions`);
 
 module.exports = {

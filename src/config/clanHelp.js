@@ -19,4 +19,4 @@ const clanHelp = [
     [`color`, `Change the color of your clan`, [`hexadecimal`]]
 ];
 
-module.exports = clanHelp;
+module.exports = { clanHelp };

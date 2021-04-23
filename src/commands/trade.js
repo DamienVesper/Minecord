@@ -1,29 +1,17 @@
 const Discord = require(`discord.js`);
 const User = require(`../models/user.model`);
-<<<<<<< HEAD
 const { config } = require(`../inedx.js`);
 const { emojis } = require(`../config/emojis`);
 const { prices } = require(`../config/prices/materials`);
 const { getClosestMatch } = require(`../config/functions`);
 const trade = require("../../../../MobaXterm/slash/RemoteFiles/133700_5_5/trade");
-=======
-const { config } = require(`../index.js`);
-const { emojis } = require(`../config/emojis`);
-const { prices } = require(`../config/prices/materials`);
-const { getClosestMatch } = require(`../config/functions`);
->>>>>>> 37441649851105541b39cfad8331162e3ff64a20
 
 module.exports = {
     name: `trade`,
     description: `Trade with a user.`,
     usage: `<user>`,
     cooldown: 60,
-<<<<<<< HEAD
     aliases: null
-=======
-    aliases: null,
-    dev: true
->>>>>>> 37441649851105541b39cfad8331162e3ff64a20
 }
 
 const calculateValue = items => {
@@ -45,19 +33,12 @@ const matchItem = item => {
 
 module.exports.run = async(client, message, args) => { 
     const m = `${message.author} »`;
-<<<<<<< HEAD
 
     if(!config.developerIDs.includes(message.author.id)) return;
     const t = `**TRADER** »`;
 
     let subCommands = [`accept`, `add`, `remove`, `cancel`, `confirm`, `deny`];
     if(subCommands.ibncludes(args[0])) return;
-=======
-    const t = `**TRADER** »`;
-
-    let subCommands = [`accept`, `add`, `remove`, `cancel`, `confirm`, `deny`];
-    if(subCommands.includes(args[0])) return;
->>>>>>> 37441649851105541b39cfad8331162e3ff64a20
 
     const startUser = message.author;
 
@@ -146,29 +127,16 @@ module.exports.run = async(client, message, args) => {
                     const m = `${message.author} »`;
                     const _user = message.author.id == discUser.id ? 1: 0;
 
-<<<<<<< HEAD
-=======
-                    let item, quantity, itemPrice;
->>>>>>> 37441649851105541b39cfad8331162e3ff64a20
                     switch(args.shift()) {
                         case `add`:
                             if((args.length < 3)) return message.channel.send(`${m} Proper usage is \`${config.prefix}trade add <item> <quantity>\`.`);
 
-<<<<<<< HEAD
                             let item = args[0];
                             let quantity = parseInt(args[1]);
 
                             if(!quantity || isNaN(quantity) || quantity <= 0) return message.channel.send(`${m} Proper usage is \`${config.prefix}trade add <item> <quantity>\`.`);
 
                             let itemPrice = prices[item];
-=======
-                            item = args[0];
-                            quantity = parseInt(args[1]);
-
-                            if(!quantity || isNaN(quantity) || quantity <= 0) return message.channel.send(`${m} Proper usage is \`${config.prefix}trade add <item> <quantity>\`.`);
-
-                            itemPrice = prices[item];
->>>>>>> 37441649851105541b39cfad8331162e3ff64a20
                             if(!itemPrice) return message.channel.send(`${m} That is an invalid item. Did you mean \`${config.prefix}trade add ${matchItem(item)}\`?`);
 
                             updateTrade(_user, 1, item, quantity);
@@ -176,15 +144,9 @@ module.exports.run = async(client, message, args) => {
                         case `remove`:
                             if((args.length < 3)) return message.channel.send(`${m} Proper usage is \`${config.prefix}trade remove <item>\`.`);
 
-<<<<<<< HEAD
                             let item = args[0];
 
                             let itemPrice = prices[item];
-=======
-                            item = args[0];
-
-                            itemPrice = prices[item];
->>>>>>> 37441649851105541b39cfad8331162e3ff64a20
                             if(!itemPrice) return message.channel.send(`${m} That is an invalid item. Did you mean \`${config.prefix}trade add ${matchItem(item)}\`?`);
                             
                             updateTrade(_user, 0, item);

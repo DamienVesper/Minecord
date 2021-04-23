@@ -44,4 +44,4 @@ const prices = {
     }
 };
 
-module.exports = prices;
+module.exports = { prices };
