@@ -24,12 +24,9 @@
   },
   "homepage": "https://github.com/DamienVesper/Minecord#readme",
   "dependencies": {
-    "axios": "^0.21.1",
-    "dblapi.js": "^2.4.1",
-    "discord.js": "^11.5.1",
+    "discord.js": "11.5.1",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.11.16"
+    "mongoose": "^5.12.5"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
