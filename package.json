@@ -13,9 +13,9 @@
     "url": "git+https://github.com/DamienVesper/Minecord.git"
   },
   "keywords": [
-    "discord",
-    "minecraft",
-    "damienvesper"
+    "discord-bot",
+    "discord.js",
+    "minecraft"
   ],
   "author": "DamienVesper",
   "license": "ISC",
