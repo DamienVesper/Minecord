@@ -94,8 +94,8 @@ client.on(`message`, async message => {
         }
 
         catch (err) {
-            console.log(`There was an error executing command ${command} by ${message.author.tag}.`);
-            message.channel.send(err);
+            message.channel.send(`${m} There was an error executing that command.`);
+            console.log(err);
         }
     }
 });

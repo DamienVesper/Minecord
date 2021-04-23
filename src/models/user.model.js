@@ -5,10 +5,6 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    clan: {
-        type: Number,
-        required: true
-    },
     cooldowns: {
         chop: {
             type: String,
