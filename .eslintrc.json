@@ -14,6 +14,11 @@
         "ecmaVersion": 6,
         "requireConfigFile": false
     },
+    "plugins": [
+        "import",
+        "node",
+        "promise"
+    ],
     "rules": {
         "func-call-spacing": 1,
         "no-unexpected-multiline": 1,
