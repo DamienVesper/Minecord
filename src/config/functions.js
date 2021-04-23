@@ -2,6 +2,7 @@ module.exports = {
     calculateMaxExp: level => {
         return Math.floor((100 * Math.E * level) / 2);
     },
+
     cleanse: str => {
         return str
             .replace(`\`\`\``, `\\\`\\\`\\\``)
@@ -12,6 +13,7 @@ module.exports = {
             .replace(`**`, `\\*\\*`)
             .replace(`*`, `\\*`);
     },
+
     getClosestMatch: (a, b) => {
         const m = []; let i; let j; const min = Math.min;
 
@@ -32,9 +34,11 @@ module.exports = {
 
         return m[b.length][a.length];
     },
+
     rng: (min, max) => {
         return Math.floor(Math.random() * (max + 1 - min) + min);
     },
+
     standardize: num => {
         return typeof num === `number`
             ? Math.abs(Number(num)) >= 1.0e+21
@@ -54,6 +58,7 @@ module.exports = {
                                         : Math.abs(Number(num))
             : NaN;
     },
+
     toCamelCase: array => {
         let result = ``;
         for (let i = 0, len = array.length; i < len; i++) {
@@ -66,7 +71,10 @@ module.exports = {
         }
         return result;
     },
-    toCapitalString: string => { return string.toString().replace(/^\w/, f => f.toUpperCase()).split(/(?=[A-Z])/).join(` `); },
-    toCapitalStringFromArray: array => { return array.join(``).toString().replace(/^\w/, f => f.toUpperCase()).split(/(?=[A-Z])/).join(` `); },
-    addCommaSeparators: num => { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, `,`); }
+
+    toCapitalString: string => string.toString().replace(/^\w/, f => f.toUpperCase()).split(/(?=[A-Z])/).join(` `),
+
+    toCapitalStringFromArray: array => array.join(``).toString().replace(/^\w/, f => f.toUpperCase()).split(/(?=[A-Z])/).join(` `),
+
+    addCommaSeparators: num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, `,`);
 };

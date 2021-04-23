@@ -22,22 +22,8 @@ const User = require(`./models/user.model.js`);
 
 /* Client Events */
 client.on(`ready`, async () => {
-    console.log(`${client.user.username}#${client.user.discriminator} has started, with ${client.users.size} users in ${client.guilds.size} servers.`);
+    console.log(`${client.user.tag} has started, with ${client.users.size} users in ${client.guilds.size} servers.`);
     refreshActivity();
-
-    const users = await User.find({});
-    users.forEach(user => {
-        user.ores.prisms = 0;
-        user.wood.charcoal = 0;
-        user.drops.netherStars = 0;
-
-        user.weapons.pickaxes.rainbow = false;
-        user.weapons.pickaxes.mystery = false;
-        user.weapons.axes.fire = false;
-        user.weapons.axes.battle = false;
-
-        user.save(err => console.log(`[${user.discordID}] ${err ? `Error saving user data.` : `User data saved succesfully.`}`));
-    });
 });
 
 /* Client Checks */
@@ -86,6 +72,7 @@ client.on(`message`, async message => {
             console.log(`${message.author.tag} ran command ${command} in ${message.guild ? `${message.guild.name} [${message.guild.id}].` : ``}`);
             cmd.run(client, message, args);
         }
+
         catch (err) {
             console.log(`There was an error executing command ${command} by ${message.author.tag}.`);
             message.channel.send(err);
