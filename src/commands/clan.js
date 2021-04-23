@@ -88,9 +88,9 @@ module.exports.run = async (client, message, args) => {
         const clan = await Clan.findById(dbUser.clan);
 
         let clanMember;
-        clan.members.forEach((f, i) => f.discordID == message.author.id ? clanMember = clan.members[i] : null);
+        clan.members.forEach((f, i) => f.discordID = message.author.id ? clanMember = clan.members[i] : null);
 
-        if (clanMember.type == 2) return message.channel.send(`${m} You cannot leave your clan if you are the owner!`);
+        if (clanMember.type === 2) return message.channel.send(`${m} You cannot leave your clan if you are the owner!`);
 
         const memberIndex = clan.members.indexOf(clanMember);
         clan.members.splice(memberIndex, memberIndex + 1);
@@ -101,6 +101,5 @@ module.exports.run = async (client, message, args) => {
 
         message.channel.send(`${m} You have left clan \`${clan.name}\`.`);
     }
-    else if (arg === `promote` || arg === `demote`) return;
     else return message.channel.send(getClanHelp());
 };
