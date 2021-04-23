@@ -13,17 +13,6 @@ const config = {
     developerIDs: [`386940319666667521`],
 
     prefix: `m!`,
-    token: process.env.DISCORD_BOT_TOKEN,
-
-    db: {
-        uri: process.env.DATABASE_URI,
-        uriParams: {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        },
-        password: process.env.DATABASE_PASSWORD
-    },
-
     footer: `Created by DamienVesper#0001 | ${pjson.version}`
 };
 

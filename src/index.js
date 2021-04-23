@@ -15,7 +15,10 @@ const client = new Discord.Client({
 });
 
 const mongoose = require(`mongoose`);
-mongoose.connect(config.db.uri, config.db.uriParams).then(() => console.log(`Succesfully connected Mongoose to MongoDB.`)).catch(err => console.error(err));
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => console.log(`Succesfully connected Mongoose to MongoDB.`)).catch(err => console.error(err));
 
 // Arbitrary command loader.
 client.commands = new Discord.Collection();
@@ -97,4 +100,4 @@ client.on(`message`, async message => {
     }
 });
 
-client.login(config.token).catch(() => console.error(`Failed to authenticate client with application.`));
+client.login(process.env.DISCORD_BOT_TOKEN).catch(() => console.error(`Failed to authenticate client with application.`));
