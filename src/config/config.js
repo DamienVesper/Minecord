@@ -21,7 +21,7 @@ const config = {
         password: process.env.DATABASE_PASSWORD
     },
     version: `1.0.0`,
-    footer: `© Minecord 2021`
+    footer: `Created by DamienVesper#0001`
 };
 
 config.footer += ` | v${config.version}`;
