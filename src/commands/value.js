@@ -82,7 +82,7 @@ module.exports.run = async (client, message, args) => {
     let userRank;
     for (let i = 0; i < lb.length; i++) if (lb[i].discordID == message.author.id) userRank = i;
 
-    const sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.MessageEmbed()
         .setAuthor(`Value | ${discUser.tag}`)
         .setColor(0xffe200)
         .setTimestamp(new Date())

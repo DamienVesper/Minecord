@@ -14,7 +14,7 @@ module.exports = {
 module.exports.run = async(client, message, args) => {
     const m = `${message.author} »`;
 
-    let sEmbed = new Discord.RichEmbed()
+    let sEmbed = new Discord.MessageEmbed()
         .setColor(0xcccccc)
         .setAuthor(`Help Menu`, null, `https://minecorddocs.glitch.me/`)
         .setTimestamp(new Date())
@@ -46,7 +46,7 @@ module.exports.run = async (client, message, args) => {
         let helpTxt = ``;
         commands.forEach(cmd => cmd.dev != true && cmd.name != `` ? helpTxt += `\`${config.prefix + cmd.name + (cmd.usage !== null ? ` ${cmd.usage}` : ``)}\` - ${cmd.description}\n` : null);
 
-        const sEmbed = new Discord.RichEmbed()
+        const sEmbed = new Discord.MessageEmbed()
             .setColor(0xcfcf53)
             .setAuthor(`Help Menu`, null, `https://minecorddocs.glitch.me/`)
             .setDescription(helpTxt)
@@ -64,7 +64,7 @@ module.exports.run = async (client, message, args) => {
     if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(`, `)}`);
     if (command.cooldown !== null) data.push(`**Cooldown:** ${command.cooldown} seconds.`);
 
-    const sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.MessageEmbed()
         .setColor(0xcfcf53)
         .setAuthor(`Help Menu | ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}`)
         .setDescription(`${command.description}\n\n${data.join(`\n`)}`)

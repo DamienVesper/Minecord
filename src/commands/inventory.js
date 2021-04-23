@@ -46,7 +46,7 @@ module.exports.run = async (client, message, args) => {
         if (typeof item === `number` && item > 0) oreTxt += `${emojis[i]} ${item}\n`;
     }
 
-    const sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.MessageEmbed()
         .setAuthor(`User Inventory | ${discUser.tag}`)
         .setColor(0xffe200)
         .setTimestamp(new Date())

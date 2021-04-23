@@ -15,7 +15,7 @@ module.exports.run = async (client, message, args) => {
 
     const msg = await message.channel.send(`Ping?`);
 
-    const sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.MessageEmbed()
         .setColor(0xffa500)
         .setAuthor(`Client Latency`)
         .setDescription(`

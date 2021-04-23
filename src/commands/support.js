@@ -12,7 +12,7 @@ module.exports = {
 };
 
 module.exports.run = async (client, message, args) => {
-    const embed = new Discord.RichEmbed()
+    const embed = new Discord.MessageEmbed()
         .setDescription(`**You can join our support server 
                     by clicking [here.](https://discord.gg/Mf4eBsD)**`)
         .setColor(0xCFCF53);

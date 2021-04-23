@@ -26,7 +26,7 @@ module.exports.run = async (client, message, args) => {
     const itemFamily = assigner.arg[args[0]];
 
     if (!itemFamily) {
-        const sEmbed = new Discord.RichEmbed()
+        const sEmbed = new Discord.MessageEmbed()
             .setColor(0xffa500)
             .setAuthor(`Shop Menu`)
             .setDescription(`
@@ -45,7 +45,7 @@ module.exports.run = async (client, message, args) => {
         if (!dbUser.weapons[typeLower][i]) shopTxt += `${emojis[i + itemFamily]} ${i.slice(0, 1).toUpperCase() + i.slice(1)} ${itemFamily == `Pick` ? `Pickaxe` : itemFamily} - ${(item[1] === `cash` ? `$` : ``) + format(item[0]) + (item[1] !== `cash` ? emojis[item[1]] : ``)} \n`;
     }
 
-    const sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.MessageEmbed()
         .setColor(0xffa500)
         .setAuthor(`Shop Menu | ${type}`)
         .setDescription(`${shopTxt == `` ? `This shop is out of stock!` : `Use \`${config.prefix}buy ${client.commands.get(`buy`).usage}\` to buy an item.\n\n${shopTxt}`}`)

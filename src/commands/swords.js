@@ -37,7 +37,7 @@ module.exports.run = async (client, message, args) => {
         if (swordEmoji && sword === true) swordTxt += `${swordEmoji} ${i.slice(0, 1).toUpperCase() + i.slice(1)} Sword\n`;
     }
 
-    const sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.MessageEmbed()
         .setColor(0xcfcf53)
         .setAuthor(`Unlocked Swords | ${discUser.tag}`)
         .setDescription(swordTxt)

@@ -17,7 +17,7 @@ const lbs = [`cash`, `level`];
 module.exports.run = async (client, message, args) => {
     const m = `${message.author} »`;
     if (!lbs.includes(args[0])) {
-        const sEmbed = new Discord.RichEmbed()
+        const sEmbed = new Discord.MessageEmbed()
             .setColor(0xcfcf53)
             .setAuthor(`Global Leaderboard`)
             .setDescription(`
@@ -55,7 +55,7 @@ module.exports.run = async (client, message, args) => {
         lbTxt += `\n`;
     }
 
-    const sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.MessageEmbed()
         .setColor(0xcfcf53)
         .setAuthor(`${args[0].replace(/^\w/, f => f.toUpperCase())} Leaderboard`)
         .setTimestamp(new Date())

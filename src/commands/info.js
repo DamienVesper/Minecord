@@ -72,7 +72,7 @@ module.exports.run = async (client, message, args) => {
         netheritesword: { color: 0x773e92, desc: `The Netherite Sword harvests the power of the Nether to kill **shulkers** ${emoji.shulker} which drop **shulker shells** ${emojis.shulkerShell}` }
     };
 
-    const embed = new Discord.RichEmbed()
+    const embed = new Discord.MessageEmbed()
         .setTitle(`***${toCapitalString(args[0])} ${toolType}***`)
         .addField(`${item[1] == `cash` ? `$${addCommaSeparators(item[0])}` : item[1] == `emerald` ? `${addCommaSeparators(item[0])} ${emojis.emerald}` : `\u200b`}`, toolInfo[args[0].toLowerCase() + toolType.toLowerCase()].desc)
         .setColor(toolInfo[args[0].toLowerCase() + toolType.toLowerCase()].color)

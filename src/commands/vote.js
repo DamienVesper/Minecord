@@ -10,7 +10,7 @@ module.exports = {
 };
 
 module.exports.run = async (client, message, args) => {
-    const embed = new Discord.RichEmbed()
+    const embed = new Discord.MessageEmbed()
         .setColor(0xffa500)
         .setAuthor(`Vote for Minecord`)
         .setThumbnail(`https://cdn.glitch.com/12fce8e2-cbfb-4596-aeea-096e3feba0df%2F669963346530795526.png?v=1579820875106`)

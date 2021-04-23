@@ -12,7 +12,7 @@ module.exports = {
 };
 
 module.exports.run = async (client, message, args) => {
-    const embed = new Discord.RichEmbed()
+    const embed = new Discord.MessageEmbed()
         .setDescription(`**[Invite Minecord to your server by clicking here!](https://discordapp.com/api/oauth2/authorize?client_id=625363818968776705&permissions=321536&scope=bot)**`)
         .setColor(0xCFCF53);
     message.channel.send(embed);

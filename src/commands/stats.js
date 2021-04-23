@@ -39,7 +39,7 @@ module.exports.run = async (client, message, args) => {
 
     const clan = dbUser.clan ? await Clan.findById(dbUser.clan) : null;
 
-    const sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.MessageEmbed()
         .setColor(0xcfcf53)
         .setAuthor(`User Profile | ${discUser.tag}`, discUser.avatarURL)
         .setDescription(`
